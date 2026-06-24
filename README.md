@@ -1,50 +1,50 @@
-# dotfiles
+<p align="center">
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Silkscreen&size=75&duration=5000&pause=2000&color=9AAC6F&background=1A1D15&center=true&vCenter=true&width=600&height=150&lines=joao-dots" alt="Dotfiles Banner" /></a>
+<br/>
+        <img src="https://img.shields.io/badge/i3%20-%20WM?style=for-the-badge&label=WM&labelColor=%239aac6f&color=%23c8c0aa" />
+        <img src="https://img.shields.io/badge/i3status%20-%20BAR?style=for-the-badge&label=BAR&labelColor=%23c0a268&color=%23c8c0aa" />
+        <img src="https://img.shields.io/badge/alacritty%20-%20TERMINAL?style=for-the-badge&label=TERMINAL&labelColor=%236f8a75&color=%23181a14"/>
+        <img src="https://img.shields.io/badge/fish%20-%20SHELL?style=for-the-badge&label=SHELL&labelColor=%23b57766&color=%23c8c0aa"/>
+        <br>
+</p>
 
-Configs do meu ricing **i3 + Manjaro** (X11), estética *earthy*.
+## Overview
 
-Repositório simples e local: os arquivos ficam **direto** aqui dentro, sem symlink,
-sem stow. A pasta `config/` espelha o `~/.config`.
+> My personal Manjaro-based dots for i3 (X11). Minimalist style with an earthy matte palette (`#1a1d15` / `#9aac6f`). I use feh for the wallpaper, and the bar is i3status with custom Nerd Font icons. The shell is fish, and I use alacritty as the terminal with rofi as the launcher. I recommend a Nerd Font so everything looks nicer — I use Hack Nerd Font.
 
-```
-dotfiles/
-├─ config/        # = ~/.config
-│  ├─ alacritty/  ├─ fish/   ├─ i3/   ├─ i3status/
-│  ├─ rofi/       ├─ micro/  ├─ gtk-3.0/  └─ gtk-4.0/
-├─ wallpapers/
-├─ sync.sh        # copia ~/.config -> repo (rode antes de commitar)
-└─ README.md
-```
+![Screenshot](screenshot.png)
 
-## Fluxo do dia a dia
+## Dependencies
 
-Eu edito os configs normalmente em `~/.config/...` (é de onde o sistema lê).
-Pra versionar as mudanças:
+| Category                 | Packages                                |
+| ------------------------ | --------------------------------------- |
+| **Window Manager**       | i3-wm                                   |
+| **Status Bar & Widgets** | i3status                                |
+| **Terminal**             | alacritty                               |
+| **Launchers**            | rofi, network-manager-applet            |
+| **Lock & Session**       | i3lock, dex                             |
+| **Audio**                | pipewire, pamixer, pavucontrol          |
+| **Display & Power**      | brightnessctl                           |
+| **Clipboard**            | xclip                                   |
+| **Screenshots**          | maim, slop, xclip                       |
+| **Utilities**            | feh, nnn, micro                         |
+| **Fonts & Theme**        | ttf-hack-nerd, Adwaita-dark             |
+| **System**               | fish                                    |
 
-```fish
-cd ~/dotfiles
-./sync.sh                 # copia ~/.config -> config/ e o wallpaper
-git add -A
-git commit -m "..."
-git push
-```
+### Cursor
 
-## Aplicar numa máquina nova
+> I use breeze_cursors as my cursor theme.
 
-```fish
-git clone git@github.com:joaovict0r2/dotfiles.git ~/dotfiles
-cp -r ~/dotfiles/config/. ~/.config/
-cp ~/dotfiles/wallpapers/wallpaper.jpg ~/Pictures/wallpapers/
-```
+## Keybinds
 
-## Detalhes
-
-- Tecla **Super (Mod4)**, teclado **ABNT2** (`ccedilla`/ç no lugar de `;`).
-- Paleta earthy `#1a1d15` / `#9aac6f`; fonte **Hack Nerd Font** (ícones da barra).
-- Barra **i3status** (sem polybar); launcher **rofi**; shell **fish**; terminal **alacritty**.
-- Áudio via **PipeWire** (systemd user: pipewire + pipewire-pulse + wireplumber).
-  Não instalar o pacote `pulseaudio` (conflita com `pipewire-pulse`).
-
-### Dependências
-
-`i3-wm i3status alacritty rofi fish micro feh maim slop xclip pamixer brightnessctl`
-`i3lock network-manager-applet dex nnn pavucontrol` + **Hack Nerd Font**.
+| Keybind             | Action                      |
+| ------------------- | --------------------------- |
+| `SUPER + D`         | App launcher (rofi)         |
+| `SUPER + Return`    | Terminal (alacritty)        |
+| `SUPER + E`         | File manager (nnn)          |
+| `SUPER + N`         | Editor (micro)              |
+| `SUPER + Q`         | Close window                |
+| `SUPER + L`         | Lock screen (i3lock)        |
+| `SUPER + F`         | Fullscreen                  |
+| `Print`             | Screenshot region (maim)    |
+| `SUPER + Shift + R` | Restart i3                  |
