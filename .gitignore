@@ -1,0 +1,7 @@
+# runtime do fish (nao versionar)
+config/fish/fish_variables
+config/fish/completions/
+config/fish/conf.d/
+# lixo comum
+*.swp
+.DS_Store

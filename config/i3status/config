@@ -1,0 +1,57 @@
+# i3status — earthy, polido. Editar como UTF-8.
+general {
+        colors = true
+        color_good     = "#9aac6f"
+        color_degraded = "#c0a268"
+        color_bad      = "#b57766"
+        interval = 5
+}
+
+order += "volume master"
+order += "cpu_temperature 11"
+order += "load"
+order += "memory"
+order += "disk /"
+order += "battery all"
+order += "tztime local"
+
+volume master {
+        format       = " %volume"
+        format_muted = " muted"
+        device       = "pulse"
+}
+
+cpu_temperature 11 {
+        format = " CPU %degrees°C"
+        path   = "/sys/class/thermal/thermal_zone11/temp"
+}
+
+load {
+        format = " %1min"
+}
+
+memory {
+        format             = "󰍛 RAM %used"
+        threshold_degraded = "10%"
+        format_degraded    = "󰍛 RAM %used"
+}
+
+disk "/" {
+        format = " %avail"
+}
+
+battery all {
+        format         = "%status %percentage %remaining"
+        format_down    = ""
+        status_chr     = ""
+        status_bat     = ""
+        status_full    = ""
+        status_unk     = ""
+        low_threshold  = 15
+        threshold_type = percentage
+        integer_battery_capacity = true
+}
+
+tztime local {
+        format = " %d/%m %H:%M"
+}
