@@ -9,7 +9,6 @@ general {
 
 order += "volume master"
 order += "cpu_temperature 11"
-order += "load"
 order += "memory"
 order += "disk /"
 order += "battery all"
@@ -26,10 +25,6 @@ cpu_temperature 11 {
         path   = "/sys/class/thermal/thermal_zone11/temp"
 }
 
-load {
-        format = " %1min"
-}
-
 memory {
         format             = "󰍛 RAM %used"
         threshold_degraded = "10%"
@@ -41,7 +36,7 @@ disk "/" {
 }
 
 battery all {
-        format         = "%status %percentage %remaining"
+        format         = "%status %percentage"
         format_down    = ""
         status_chr     = ""
         status_bat     = ""
