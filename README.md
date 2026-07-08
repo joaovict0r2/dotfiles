@@ -29,7 +29,7 @@
 
 | Keybind             | Action                      |
 | ------------------- | --------------------------- |
-| `SUPER + D`         | App launcher (rofi)         |
+| `SUPER + P`         | App launcher (rofi)         |
 | `SUPER + Return`    | Terminal (alacritty)        |
 | `SUPER + E`         | File manager (nnn)          |
 | `SUPER + N`         | Editor (micro)              |
