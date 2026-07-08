@@ -11,10 +11,6 @@ set $refresh_i3status killall -SIGUSR1 i3status
 
 floating_modifier $mod
 
-# Personal
-#
-exec --no-startup-id picom &
-
 bindsym Print exec maim -s | xclip -selection clipboard -t image/png
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
@@ -67,10 +63,6 @@ bindsym $mod+Shift+Right move right
 bindcode 74 exec --no-startup-id pamixer -t
 bindcode 75 exec --no-startup-id pamixer -d 5
 bindcode 76 exec --no-startup-id pamixer -i 5
-
-# Brightness keys by keycode
-bindcode 72 exec --no-startup-id brightnessctl set 5%-
-bindcode 73 exec --no-startup-id brightnessctl set +5%
 
 # Remove title bars
 default_border pixel 2
@@ -175,3 +167,7 @@ client.focused_inactive #4a4d3d #1a1d15 #c8c0aa #4a4d3d #4a4d3d
 client.unfocused        #2f3327 #10120d #8f8875 #2f3327 #2f3327
 client.urgent           #9b5f50 #211b14 #eee4cb #9b5f50 #9b5f50
 client.placeholder      #181a14 #10120d #d6d0bd #181a14 #181a14
+
+# Media keys — brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
