@@ -22,7 +22,13 @@ volume master {
 
 cpu_temperature 11 {
         format = " CPU %degrees°C"
-        path   = "/sys/class/thermal/thermal_zone11/temp"
+        # coretemp "Package id 0" via hwmon — thermal_zone11 (x86_pkg_temp/ACPI)
+        # jitters +/-10C sample to sample even at idle; this hwmon reading is
+        # the stable, accurate one (same value `sensors` reports).
+        # NOTE: hwmon index can shift after a kernel/driver update — if this
+        # path stops existing, find the new one with:
+        #   grep -l coretemp /sys/class/hwmon/hwmon*/name
+        path   = "/sys/class/hwmon/hwmon5/temp1_input"
 }
 
 memory {

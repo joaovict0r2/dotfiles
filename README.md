@@ -14,6 +14,7 @@
 | **Launchers**            | rofi, network-manager-applet            |
 | **Lock & Session**       | i3lock, dex                             |
 | **Audio**                | pipewire, pamixer, pavucontrol          |
+| **Notifications**        | dunst                                   |
 | **Display & Power**      | brightnessctl                           |
 | **Clipboard**            | xclip                                   |
 | **Screenshots**          | maim, slop, xclip                       |

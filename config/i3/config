@@ -21,6 +21,7 @@ set $ws10 "10"
 # ============================================================
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
+exec_always --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY; killall dunst; dunst
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/woods-cabin.png
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -129,10 +130,10 @@ bindcode --release Shift+70 exec --no-startup-id sh -c 'mkdir -p "$HOME/Pictures
 # ============================================================
 #  Keybindings — media & hardware
 # ============================================================
-# Audio (keycodes: mute / vol down / vol up)
-bindcode 74 exec --no-startup-id pamixer -t
-bindcode 75 exec --no-startup-id pamixer -d 5
-bindcode 76 exec --no-startup-id pamixer -i 5
+# Audio
+bindsym XF86AudioMute        exec --no-startup-id pamixer -t
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
 
 # Brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%

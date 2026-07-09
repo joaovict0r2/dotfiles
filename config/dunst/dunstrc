@@ -1,0 +1,283 @@
+# dunst configuration
+# Full reference: man dunst(5)
+
+# ============================================================
+#  GLOBAL
+# ============================================================
+[global]
+
+    #### Display ####
+    # monitor to show notifications on
+    monitor = 0
+    # mouse | keyboard | none — follow focus instead of `monitor`
+    follow = none
+
+    #### Geometry ####
+    # fixed width; use "(0, 300)" for dynamic width
+    width = 300
+    # dynamic height, max 300 (older dunst treats this as a fixed max)
+    height = (0, 300)
+    origin = top-right
+    # (x, y) offset from origin
+    offset = (10, 50)
+    # 0 = auto-detect
+    scale = 0
+    # 0 = no limit
+    notification_limit = 20
+
+    #### Progress bar ####
+    progress_bar = true
+    # must be >= 2x frame width
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    # 0 disables rounded corners
+    progress_bar_corner_radius = 0
+    progress_bar_corners = all
+
+    #### Icons ####
+    enable_recursive_icon_lookup = true
+    # "Adwaita, breeze" to chain multiple themes
+    icon_theme = Adwaita
+    # left | right | top | off
+    icon_position = left
+    icon_corner_radius = 0
+    icon_corners = all
+    # upscale small icons, 0 disables
+    min_icon_size = 32
+    # downscale large icons, 0 disables
+    max_icon_size = 128
+    # only used without recursive lookup
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+    #### Text ####
+    font = Monospace 10
+    line_height = 0
+    # full | strip | no — see pango markup docs for `full`
+    markup = full
+    # Format vars: %a appname  %s summary  %b body  %c category  %S stack_tag
+    #              %i iconname (full path)  %I iconname (name only)
+    #              %p progress "[ 50%]"  %n progress "50"  %% literal %
+    format = "<b>%s</b>\n%b"
+    # left | center | right
+    alignment = left
+    vertical_alignment = center
+    # show "Xm ago" once a notification is older than this; -1 disables
+    show_age_threshold = 60
+    # start | middle | end
+    ellipsize = middle
+    ignore_newline = no
+
+    #### Behavior ####
+    sort = yes
+    stack_duplicates = true
+    hide_duplicate_count = false
+    # show count of notifications hidden by notification_limit
+    indicate_hidden = yes
+    # show (U)rl / (A)ction indicators
+    show_indicators = yes
+    # POSIX regex (true) vs fnmatch (false) for rule matching
+    enable_posix_regex = false
+    # keep notifications while user is idle past N seconds; 0 disables
+    # idle_threshold = 120
+
+    #### Frame, separators & spacing ####
+    # 0 disables
+    frame_width = 3
+    frame_color = "#4a7c7e"
+    # ignored if gap_size > 0
+    separator_height = 2
+    # auto | foreground | frame | <X color>
+    separator_color = frame
+    # needs a compositor; uses frame_width as border when > 0
+    gap_size = 0
+    padding = 10
+    horizontal_padding = 15
+    text_icon_padding = 10
+    # window corner radius, auto-lowered if it would clip content
+    corner_radius = 0
+    # comma-separated: top-left, top-right, bottom-left, bottom-right, top, bottom, left, right, all
+    corners = all
+
+    #### Transparency ####
+    # needs a compositing WM (X11 only)
+    transparency = 0
+
+    #### History ####
+    # notifications popped from history ignore their normal timeout
+    sticky_history = yes
+    history_length = 20
+
+    #### Misc / Advanced ####
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    # run rule scripts even when the notification itself is suppressed
+    always_run_script = true
+    # X11 window title
+    title = Dunst
+    # X11 window class
+    class = Dunst
+    # ignore dbus closeNotification, always honor dunst's own timeout
+    ignore_dbusclose = false
+
+    #### Wayland only ####
+    # show notifications over fullscreen windows (default: overlay)
+    # layer = top
+    force_xwayland = false
+
+    #### Legacy (X11) ####
+    # only for old nVidia drivers without RandR support
+    force_xinerama = false
+
+    #### Mouse ####
+    # Actions: none | do_action | open_url | close_current | remove_current | close_all | context | context_all
+    # Multiple actions can be chained and run in sequence.
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+# ============================================================
+#  EXPERIMENTAL
+#  Behaviour of these may change or break across releases.
+# ============================================================
+[experimental]
+    # calculate dpi per monitor instead of using Xft.dpi
+    per_monitor_dpi = false
+    # pause timeout while hovering (Wayland only)
+    pause_on_mouse_over = false
+    # PCRE regex for rules; overrides enable_posix_regex
+    enable_pcre_regex = false
+
+# ============================================================
+#  URGENCY LEVELS
+#  NOTE: colors must be quoted, otherwise "#" starts a comment.
+# ============================================================
+[urgency_low]
+    background = "#2b3e3e"
+    foreground = "#a0a0a0"
+    frame_color = "#4a7c7e"
+    timeout = 10
+    default_icon = dialog-information
+
+[urgency_normal]
+    background = "#2b3e3e"
+    foreground = "#ffffff"
+    frame_color = "#4a7c7e"
+    timeout = 10
+    override_pause_level = 30
+    default_icon = dialog-information
+
+[urgency_critical]
+    background = "#2b3e3e"
+    foreground = "#ff6b6b"
+    frame_color = "#8b3a3a"
+    timeout = 0
+    override_pause_level = 60
+    default_icon = dialog-warning
+
+# ============================================================
+#  RULES
+#  Any section not named above is a rule that overrides
+#  settings for notifications matching it.
+#
+#  Match on:    appname (prefer desktop_entry) · body · category ·
+#               desktop_entry · icon · match_transient · msg_urgency ·
+#               stack_tag · summary
+#
+#  Override:    background · foreground · format · frame_color ·
+#               fullscreen · new_icon · set_stack_tag · set_transient ·
+#               set_category · timeout · urgency · icon_position ·
+#               skip_display · history_ignore · action_name ·
+#               word_wrap · ellipsize · alignment · hide_text ·
+#               override_pause_level
+#
+#  Shell-like globbing is expanded in match values.
+#  override_pause_level = X lets a rule bypass pause mode when its
+#  value is >= dunst's current paused level (partial pause modes).
+#
+#  Scripting: set `script = <path>`, called as:
+#    script appname summary body icon urgency
+#  urgency is one of LOW, NORMAL, CRITICAL.
+#  Run `dunst -print` in a terminal to see values for building rules.
+# ============================================================
+
+### Transient handling ###
+
+# Disable the transient hint so idle_threshold can't be bypassed by the client
+#[transient_disable]
+#    match_transient = yes
+#    set_transient = no
+
+# Don't keep transient notifications in history
+#[transient_history_ignore]
+#    match_transient = yes
+#    history_ignore = yes
+
+### Fullscreen behavior ###
+# show:     always show, regardless of fullscreen windows
+# delay:    show only if no fullscreen window is active; already-drawn stays
+# pushback: like delay, but withdraws and re-delays when entering fullscreen
+# suppress: withdraw on entering fullscreen, never show new ones during it
+
+#[fullscreen_delay_everything]
+#    fullscreen = delay
+
+#[fullscreen_show_critical]
+#    msg_urgency = critical
+#    fullscreen = show
+
+### Scripting examples ###
+
+#[espeak]
+#    summary = "*"
+#    script = dunst_espeak.sh
+
+#[script-test]
+#    summary = "*script*"
+#    script = dunst_test.sh
+
+### Visibility examples ###
+
+# never displayed
+#[ignore]
+#    summary = "foobar"
+#    skip_display = true
+
+# never saved to history
+#[history-ignore]
+#    summary = "foobar"
+#    history_ignore = yes
+
+# not displayed, but kept in history
+#[skip-display]
+#    summary = "foobar"
+#    skip_display = yes
+
+### Per-app examples (Pidgin) ###
+
+#[signed_on]
+#    appname = Pidgin
+#    summary = "*signed on*"
+#    urgency = low
+
+#[signed_off]
+#    appname = Pidgin
+#    summary = "*signed off*"
+#    urgency = low
+
+#[says]
+#    appname = Pidgin
+#    summary = "*says*"
+#    urgency = critical
+
+#[twitter]
+#    appname = Pidgin
+#    summary = "*twitter.com*"
+#    urgency = normal
+
+### Stacking example ###
+
+#[stack-volumes]
+#    appname = "some_volume_notifiers"
+#    set_stack_tag = "volume"
